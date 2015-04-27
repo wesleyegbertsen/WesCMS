@@ -43,6 +43,9 @@ theApp.controller("ctrlMain", ["$scope", "$location", "SettingsService", functio
         androidbar: ""
     };
 
+    /**
+     * Loop through all the settings and check if there is a equivalent value in the database for the key
+     */
     SettingsService.getSettings(function (settings) {
         if (settings) {
             for (var key in $scope.settings) {

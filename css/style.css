@@ -8,12 +8,28 @@
 
 body {
     display: flex;
-    min-height: 100vh;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: -webkit-box;
+
     flex-direction: column;
+    -ms-flex-direction: column;
+    -webkit-flex-direction: column;
+    -webkit-box-orient: vertical;
+
+    min-height: 100vh;
 }
 
 main {
     flex: 1 0 auto;
+    -ms-flex: 1 0 auto;
+    -webkit-flex: 1 0 auto;
+    -webkit-box-flex: 1;
+}
+
+/* Fix for sticky footer in IE, class (.flexboxtweener) will be dynamically added by modernizr if IE */
+.flexboxtweener, .flexboxtweener > body {
+    height: 100%;
 }
 
 .icon-block {
