@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="WesCMS" ng-controller="ctrlMain" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <!--  Android 5 Chrome Color-->
+    <meta name="theme-color" content="{{settings.androidbar}}">
+
+    <title ng-bind="settings.sitename"></title>
+
+    <!-- CSS  -->
+    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body>
+
+<!-- navigation -->
+<cnav></cnav>
+
+<!-- View -->
+<main>
+    <div class="container">
+        <h1 class="header orange-text" ng-bind="main.pageTitle"></h1>
+        <ng-view></ng-view>
+    </div>
+</main>
+
+<!-- footer -->
+<cfooter></cfooter>
+
+
+<!--  Scripts-->
+<script src="js/jquery-2.1.1.js"></script>
+<script src="js/materialize.js"></script>
+
+<script src="js/angular.js"></script>
+<script src="js/angular-route.js"></script>
+
+<script src="js/angular/main.js"></script>
+<script src="js/angular/config.js"></script>
+<script src="js/angular/service/settings.js"></script>
+
+</body>
+</html>
