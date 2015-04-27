@@ -22,7 +22,7 @@ $app->get('/settings/:value','getSetting');
 /* Slim Framework settings */
 $app->contentType('application/json');
 $app->notFound(function () {
-    echo '{"error":{"text":"404 Page Not Found"}}';
+    echo '{"error":{"message":"404 Page Not Found"}}';
 });
 
 $app->run();
@@ -39,7 +39,7 @@ function getUsers() {
 		echo '{"users": ' . json_encode($users) . '}';
 	} catch(PDOException $e) {
 		//error_log($e->getMessage(), 3, '/var/tmp/phperror.log'); //Write error log
-		echo '{"error":{"text":'. $e->getMessage() .'}}';
+		echo '{"error":{"message":'. $e->getMessage() .'}}';
 	}
 }
 
@@ -54,7 +54,7 @@ function getUserUpdates() {
 		$db = null;
 		echo '{"updates": ' . json_encode($updates) . '}';
 	} catch(PDOException $e) {
-		echo '{"error":{"text":'. $e->getMessage() .'}}';
+		echo '{"error":{"message":'. $e->getMessage() .'}}';
 	}
 }
 
@@ -69,7 +69,7 @@ function deleteUpdate($update_id)
         $db = null;
 		echo true;
 	} catch(PDOException $e) {
-		echo '{"error":{"text":'. $e->getMessage() .'}}';
+		echo '{"error":{"message":'. $e->getMessage() .'}}';
 	}
 }
 
@@ -95,7 +95,7 @@ function getUserSearch($query) {
 		echo '{"users": ' . json_encode($users) . '}';
 	} catch(PDOException $e) {
 		//error_log($e->getMessage(), 3, '/var/tmp/phperror.log'); //Write error log
-		echo '{"error":{"text":'. $e->getMessage() .'}}';
+		echo '{"error":{"message":'. $e->getMessage() .'}}';
 	}
 }
 
@@ -110,7 +110,7 @@ function getSettings () {
         echo '{"settings": ' . json_encode($settings) . '}';
     } catch(PDOException $e) {
         //error_log($e->getMessage(), 3, '/var/tmp/phperror.log'); //Write error log
-        echo '{"error":{"text":'. $e->getMessage() .'}}';
+        echo '{"error":{"message":'. $e->getMessage() .'}}';
     }
 }
 
@@ -125,11 +125,11 @@ function getSetting($value) {
         if(sizeof($setting) > 0) {
             echo '{"setting":"' . $setting[0]->setting_value . '"}';
         } else {
-            echo '{"error":{"text":"Setting not found"}}';
+            echo '{"error":{"message":"Setting not found"}}';
         }
     } catch(PDOException $e) {
         //error_log($e->getMessage(), 3, '/var/tmp/phperror.log'); //Write error log
-        echo '{"error":{"text":'. $e->getMessage() .'}}';
+        echo '{"error":{"message":'. $e->getMessage() .'}}';
     }
 }
 
