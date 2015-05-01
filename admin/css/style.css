@@ -36,6 +36,6 @@ main {
     padding: 0 15px;
 }
 
-.underline-text {
-    text-decoration: underline;
+#login-form {
+    padding: 10px 25px;
 }
