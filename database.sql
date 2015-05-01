@@ -17,10 +17,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Databank: `test`
+-- Databank: `wescms`
 --
-CREATE DATABASE IF NOT EXISTS `test` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `test`;
+CREATE DATABASE IF NOT EXISTS `wescms` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `wescms`;
 
 -- --------------------------------------------------------
 
