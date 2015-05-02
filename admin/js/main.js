@@ -2,7 +2,7 @@
 /** General                                    **/
 /************************************************/
 
-var theApp = angular.module("WesCMS", ["ngRoute", "settingsModule", "WesCMS.development"]);
+var theApp = angular.module("WesCMS", ["ngRoute", "ngAnimate", "settingsModule", "WesCMS.development", "userModule"]);
 
 
 /************************************************/
@@ -65,10 +65,40 @@ theApp.controller("ctrlMain", ["$scope", "$location", "SettingsService", functio
 
 }]);
 
-theApp.controller("ctrlHome", ["$scope", "$location", function ($scope, $location) {
+theApp.controller("ctrlHome", ["$scope", "$location", "UserService", function ($scope, $location, UserService) {
     "use strict";
 
     $scope.setMainOptions("home", "Home");
+
+    $scope.user = {
+        username: "",
+        password: ""
+    };
+
+    $scope.error = {
+        show: false,
+        text: "Error"
+    };
+
+    $scope.login = function () {
+        $scope.error.show = false;
+        UserService.login($scope.user, function (data) {
+            if(data) {
+                if(data.success) {
+                    $location.url("/");
+                } else {
+                    $scope.error.text = data.message;
+                    $scope.error.show = true;
+                }
+            }
+        });
+    };
+
+    $scope.formChanged = function () {
+        if ($scope.error.show) {
+            $scope.error.show = false;
+        }
+    };
 
 }]);
 

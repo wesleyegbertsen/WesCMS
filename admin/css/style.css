@@ -39,3 +39,18 @@ main {
 #login-form {
     padding: 10px 25px;
 }
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak, .ng-hide:not(.ng-hide-animate)  {
+    display: block !important;
+    visibility: hidden !important;
+}
+
+/* when hiding */
+.error.ng-hide-add {
+    animation:0.5s bounceOut ease;
+}
+
+/* when showing*/
+.error.ng-hide-remove {
+    animation:0.5s bounceIn ease;
+}

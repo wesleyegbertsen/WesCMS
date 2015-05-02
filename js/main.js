@@ -2,7 +2,7 @@
 /** General                                    **/
 /************************************************/
 
-var theApp = angular.module("WesCMS", ["ngRoute", "settingsModule", "WesCMS.development"]);
+var theApp = angular.module("WesCMS", ["ngRoute", "ngAnimate", "settingsModule", "WesCMS.development"]);
 
 
 /************************************************/
