@@ -2,7 +2,7 @@
 /** General                                    **/
 /************************************************/
 
-var theApp = angular.module("WesCMS", ["ngRoute", "ngAnimate", "settingsModule", "WesCMS.development", "userModule"]);
+var theApp = angular.module("WesCMS", ["ngRoute", "ngAnimate", "ngCookies", "settingsModule", "WesCMS.development", "userModule"]);
 
 
 /************************************************/
@@ -27,7 +27,7 @@ theApp.config(["$routeProvider", function ($routeProvider) {
 /************************************************/
 /** Controllers                                **/
 /************************************************/
-theApp.controller("ctrlMain", ["$scope", "$location", "SettingsService", function ($scope, $location, SettingsService) {
+theApp.controller("ctrlMain", ["$scope", "$location", "SettingsService", "UserService", function ($scope, $location, SettingsService, UserService) {
     "use strict";
 
     //Main option variables
@@ -41,6 +41,41 @@ theApp.controller("ctrlMain", ["$scope", "$location", "SettingsService", functio
         navcolor: "",
         footercolor: "",
         androidbar: ""
+    };
+
+    $scope.user = {
+        id: "",
+        isLoggedIn: false,
+        username: "",
+        name: "",
+        profilePic: ""
+    };
+
+    UserService.isLoggedIn(function (data) {
+        if (data) {
+            if(data.success) {
+                $scope.user = data.user;
+                enableUserDropDown();
+            }
+        } else {
+            //something went wrong
+        }
+    });
+
+    $scope.logout = function () {
+        UserService.logout(function (data) {
+            if (data) {
+                if (data.success) {
+                    $scope.user.isLoggedIn = false;
+                    $scope.user.id = "";
+                    $scope.user.username = "";
+                    $scope.user.name = "";
+                    $scope.user.profilePic = "";
+                }
+            } else {
+                //Something went wrong
+            }
+        });
     };
 
     /**
@@ -65,12 +100,12 @@ theApp.controller("ctrlMain", ["$scope", "$location", "SettingsService", functio
 
 }]);
 
-theApp.controller("ctrlHome", ["$scope", "$location", "UserService", function ($scope, $location, UserService) {
+theApp.controller("ctrlHome", ["$scope", "$location", "UserService", "$cookies", function ($scope, $location, UserService, $cookies) {
     "use strict";
 
     $scope.setMainOptions("home", "Home");
 
-    $scope.user = {
+    $scope.userForm = {
         username: "",
         password: ""
     };
@@ -80,12 +115,31 @@ theApp.controller("ctrlHome", ["$scope", "$location", "UserService", function ($
         text: "Error"
     };
 
+    $scope.rememberUsername = false;
+
+
+    if ($cookies.username) {
+        $scope.userForm.username = $cookies.username;
+        $scope.rememberUsername = true;
+    }
+
     $scope.login = function () {
         $scope.error.show = false;
-        UserService.login($scope.user, function (data) {
+        UserService.login($scope.userForm, function (data) {
             if(data) {
                 if(data.success) {
-                    $location.url("/");
+                    $scope.user.username = data.username;
+                    $scope.user.profilePic = data.profilePic;
+                    $scope.user.isLoggedIn = true;
+
+                    enableUserDropDown();
+
+                    if($scope.rememberUsername) {
+                        $cookies.username = data.username;
+                    } else {
+                        delete $cookies.username;
+                    }
+
                 } else {
                     $scope.error.text = data.message;
                     $scope.error.show = true;
@@ -125,3 +179,16 @@ theApp.directive("cfooter", function () {
         templateUrl: "directives/footer.html"
     };
 });
+
+/*
+ Using timeout, to make sure the dropdown function is called after the ng-if is finished
+ As browsers by default keep all events in a queue, therefore, when digest loop is running,
+ the callback function from setTimeout will enter the queue and get executed as soon digest loop is over from the ng-if.
+ */
+function enableUserDropDown () {
+    "use strict";
+
+    setTimeout(function() {
+        $(".dropdown-button").dropdown();
+    }, 0);
+}

@@ -27,6 +27,10 @@ main {
     -webkit-box-flex: 1;
 }
 
+a {
+    outline: 0;
+}
+
 /* Fix for sticky footer in IE, class (.flexboxtweener) will be dynamically added by modernizr if IE */
 .flexboxtweener, .flexboxtweener > body {
     height: 100%;
@@ -40,7 +44,7 @@ main {
     padding: 10px 25px;
 }
 
-[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak, .ng-hide:not(.ng-hide-animate)  {
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak, .error.ng-hide:not(.ng-hide-animate)  {
     display: block !important;
     visibility: hidden !important;
 }
@@ -53,4 +57,58 @@ main {
 /* when showing*/
 .error.ng-hide-remove {
     animation:0.5s bounceIn ease;
+}
+
+#user-image {
+    max-width: 30px;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+#user-image-m {
+    max-height: 100px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+#user-info-sidebar {
+    border-bottom: 1px solid #ddd;
+    margin-top: 32px;
+    text-align: center;
+    color: #000000;
+}
+
+.side-nav .divider {
+    margin-bottom: 1px;
+}
+
+.user-arrow.right {
+    margin-left: 0px !important;
+}
+
+#user-dropdown {
+    margin-top: 64px;
+}
+
+/* icon prefix focus color */
+.input-field .prefix.active {
+    /*color: #F44336;*/
+}
+
+/* label focus color */
+.input-field input[type=text]:focus + label, .input-field input[type=password]:focus + label {
+    /*color: #F44336;*/
+}
+/* label underline focus color */
+.input-field input[type=text]:focus, .input-field input[type=password]:focus {
+    /*border-bottom: 1px solid #F44336;
+    box-shadow: 0 1px 0 0 #F44336;*/
+}
+
+#remember-username-checkbox {
+    padding-top: 5px;
+    vertical-align: middle;
+    margin-left: 10px;
 }

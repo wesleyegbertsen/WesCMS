@@ -22,6 +22,8 @@ $app->group('/users', function () use ($app) {
     $app->get('','getUsers');
     $app->get('/search/:query','getUserSearch');
     $app->post('/login', 'login');
+    $app->get('/logout', 'logout');
+    $app->get('/isLoggedIn', 'isLoggedIn');
 });
 
 require "routes/updates.php";

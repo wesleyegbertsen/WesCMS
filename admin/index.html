@@ -20,7 +20,7 @@
 
 <!-- View -->
 <main>
-    <div class="container">
+    <div class="container {{main.currentPage}}">
         <h1 class="header orange-text" ng-bind="main.pageTitle"></h1>
         <ng-view></ng-view>
     </div>
@@ -38,6 +38,7 @@
 <script src="../js/library/angular.js"></script>
 <script src="../js/library/angular-route.js"></script>
 <script src="../js/library/angular-animate.js"></script>
+<script src="../js/library/angular-cookies.js"></script>
 
 <script src="js/main.js"></script>
 <script src="js/config.js"></script>

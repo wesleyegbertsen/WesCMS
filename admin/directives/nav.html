@@ -1,15 +1,32 @@
 <header>
+    <!-- Dropdown Structure -->
+    <ul id="user-dropdown" class="dropdown-content">
+        <li><a href="#/profile">profile</a></li>
+        <li><a href="#/settings">settings</a></li>
+        <li class="divider"></li>
+        <li><a href="javascript:;" ng-click="logout()">Logout</a></li>
+    </ul>
     <nav ng-class="settings.navcolor" role="navigation">
         <div class="nav-wrapper container"><a id="logo-container" href="#/" class="brand-logo" ng-bind="settings.sitename"></a>
             <ul class="right hide-on-med-and-down">
                 <li ng-class="{ 'active' : main.currentPage === 'home' }"><a href="#/">Home</a></li>
+                <li ng-show="user.isLoggedIn" class="ng-hide"><a ng-show="user.isLoggedIn" class="dropdown-button" href="#!" data-activates="user-dropdown"><img id="user-image" ng-src="{{user.profilePic}}" alt="" class="circle responsive-img"> {{user.username}}<i class="user-arrow mdi-navigation-arrow-drop-down right"></i></a></li>
             </ul>
 
             <ul id="nav-mobile" class="side-nav">
+                <div ng-show="user.isLoggedIn" id="user-info-sidebar">
+                    <img id="user-image-m" ng-src="{{user.profilePic}}" alt="" class="circle responsive-img">
+                    <span ng-bind="user.username"></span>
+                </div>
+                <li ng-show="user.isLoggedIn"><a href="#/profile">profile</a></li>
+                <li ng-show="user.isLoggedIn"><a href="#/settings">settings</a></li>
+                <div ng-show="user.isLoggedIn" class="divider"></div>
+                <li ng-show="user.isLoggedIn"><a href="javascript:;" ng-click="logout()">Logout</a></li>
+                <div ng-show="user.isLoggedIn" class="divider"></div>
                 <li ng-class="{ 'active' : main.currentPage === 'home' }"><a href="#/">Home</a></li>
             </ul>
             <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
         </div>
     </nav>
 </header>
-<script src="../js/library/init.js"></script>
+<script src="js/library/init.js"></script>

@@ -34,7 +34,7 @@ function getUserSearch($query) {
 
 function login () {
 
-    $sql = "SELECT username, password FROM users WHERE username = ?";
+    $sql = "SELECT user_id, username, name, password, profile_pic FROM users WHERE username = ?";
     try {
         $body = getBody();
         $db = getDB();
@@ -49,7 +49,12 @@ function login () {
             $password = substr($user->password, 10);
 
             if($password == base64_encode(hash('sha256', $salt . $body->password))) {
-                echo '{"success": true}';
+                $_SESSION["user"]["isLoggedIn"] = true;
+                $_SESSION["user"]["id"] = $user->user_id;
+                $_SESSION["user"]["username"] = $user->username;
+                $_SESSION["user"]["name"] = $user->name;
+                $_SESSION["user"]["profilePic"] = $user->profile_pic;
+                echo '{"success": true, "username": "' . $body->username . '", "profilePic": "' . $user->profile_pic . '"}';
             } else {
                 echo '{"success": false, "message": "Wrong password."}';
             }
@@ -61,6 +66,24 @@ function login () {
     } catch(PDOException $e) {
         //error_log($e->getMessage(), 3, '/var/tmp/phperror.log'); //Write error log
         echo '{"error":{"message":'. $e->getMessage() .'}}';
+    }
+}
+
+function logout () {
+    unset($_SESSION["user"]);
+
+    if (isset($_SESSION["user"])) {
+        echo '{"success": false}';
+    } else {
+        echo '{"success": true}';
+    }
+}
+
+function isLoggedIn () {
+    if (isset($_SESSION["user"])) {
+        echo '{"success": true, "user": ' . json_encode($_SESSION["user"]) . '}';
+    } else {
+        echo '{"success": false}';
     }
 }
 

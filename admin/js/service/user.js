@@ -22,7 +22,7 @@ requestModule.factory("UserService", function ($http, config) {
     theServiceObject.logout = function (callback) {
         $http.get(config.backend + "users/logout")
             .success(function (data) {
-                callback(data.settings);
+                callback(data);
             })
             .error(function () {
                 callback(null);
@@ -33,7 +33,7 @@ requestModule.factory("UserService", function ($http, config) {
 
         $http.get(config.backend + "users/isLoggedIn")
             .success(function (data) {
-                callback(data.settings);
+                callback(data);
             })
             .error(function () {
                 callback(null);
