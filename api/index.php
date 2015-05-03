@@ -24,6 +24,7 @@ $app->group('/users', function () use ($app) {
     $app->post('/login', 'login');
     $app->get('/logout', 'logout');
     $app->get('/isLoggedIn', 'isLoggedIn');
+    $app->post('/register', 'register');
 });
 
 require "routes/updates.php";

@@ -54,7 +54,7 @@ function login () {
                 $_SESSION["user"]["username"] = $user->username;
                 $_SESSION["user"]["name"] = $user->name;
                 $_SESSION["user"]["profilePic"] = $user->profile_pic;
-                echo '{"success": true, "username": "' . $body->username . '", "profilePic": "' . $user->profile_pic . '"}';
+                echo '{"success": true, "user": ' . json_encode($_SESSION["user"]) . '}';
             } else {
                 echo '{"success": false, "message": "Wrong password."}';
             }
